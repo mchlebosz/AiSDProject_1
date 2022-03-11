@@ -48,11 +48,11 @@ if __name__ == '__main__':
     """    outF = open("output.out", "w")
        outF.write("test") """
 
-    dataStart = 1
-    dataStop = dataStart * 5**6 + 1
-    dataStepMultiplier = 5
+    dataStart = 100
+    dataStop = dataStart + 100000
+    dataStep = 5000
 
-    amounts = generateAmountsMuliply(dataStart, dataStop, dataStepMultiplier)
+    amounts = generateAmountsAdd(dataStart, dataStop, dataStep)
 
     inputData = generateTestingData(amounts)
     print("Generated Data")
