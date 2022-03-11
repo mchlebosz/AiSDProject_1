@@ -1,6 +1,6 @@
-def sort(list):
+def sort(list, gaps=[100894, 44842, 19930, 8858, 3837, 1750, 701, 301, 132, 57, 23, 10, 4, 1]):
     size = len(list)
-    gap = size//2
+    gap = 10
     while gap > 0:
         for i in range(gap, size):
             zaczep = list[i]
@@ -10,7 +10,7 @@ def sort(list):
                 list[j] = list[j-gap]
                 j -= gap
             list[j] = zaczep
-        gap = gap//2
+        gap -= 1
     return list
 
 
