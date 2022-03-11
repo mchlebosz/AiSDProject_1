@@ -51,7 +51,7 @@ if __name__ == '__main__':
             SelectionTime[amount][spread] = timeDiff
 
             timeStart = time.time()
-            selection.sort(values)
+            heap.sort(values)
             timeDiff = time.time() - timeStart
             HeapTime[amount][spread] = timeDiff
             """
