@@ -5,19 +5,8 @@ import quick
 import heap
 import numGen
 import time
+import amounts
 import csv
-
-
-def generateAmountsMuliply(start, end, step):
-    outArray = []
-    while start < end:
-        outArray.append(start)
-        start *= step
-    return outArray
-
-
-def generateAmountsAdd(start, end, step):
-    return [i for i in range(start, end, step)]
 
 
 def generateTestingData(amounts):
@@ -49,10 +38,10 @@ if __name__ == '__main__':
        outF.write("test") """
 
     dataStart = 100
-    dataStop = dataStart + 100000
-    dataStep = 5000
+    dataStep = 1000
+    dataStop = dataStep * 15 + 1
 
-    amounts = generateAmountsAdd(dataStart, dataStop, dataStep)
+    amounts = amounts.generate1(dataStart, dataStop, dataStep)
 
     inputData = generateTestingData(amounts)
     print("Generated Data")
