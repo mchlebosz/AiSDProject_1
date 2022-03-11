@@ -37,9 +37,9 @@ if __name__ == '__main__':
     """    outF = open("output.out", "w")
        outF.write("test") """
 
-    dataStart = 100
+    dataStart = 1000
     dataStep = 1000
-    dataStop = dataStep * 15 + 1
+    dataStop = dataStep * 18 + 1
 
     amounts = amounts.generate1(dataStart, dataStop, dataStep)
 
