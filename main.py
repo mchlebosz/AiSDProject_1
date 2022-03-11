@@ -3,34 +3,10 @@ import shell
 import selection
 import quick
 import heap
-import numGen
+import dataGen
 import time
 import amounts
-import csv
-
-
-def generateTestingData(amounts):
-    return {
-        value: {
-            "Random": numGen.Random(value),
-            "Increasing": numGen.Increasing(value),
-            "Decreasing": numGen.Decreasing(value),
-            "Constant": numGen.Constant(value),
-            "ASpread": numGen.ASpread(value),
-        } for value in amounts
-    }
-
-
-def generateOutputDict(amounts):
-    return {
-        value: {
-            "Random": -1,
-            "Increasing": -1,
-            "Decreasing": -1,
-            "Constant": -1,
-            "ASpread": -1,
-        } for value in amounts
-    }
+import csvOutput
 
 
 if __name__ == '__main__':
@@ -43,11 +19,14 @@ if __name__ == '__main__':
 
     amounts = amounts.generate1(dataStart, dataStop, dataStep)
 
-    inputData = generateTestingData(amounts)
+    inputData = dataGen.generateTestingData(amounts)
     print("Generated Data")
-    InsertionTime = generateOutputDict(amounts)
-    ShellTime = generateOutputDict(amounts)
-    SelectionTime = generateOutputDict(amounts)
+    InsertionTime = dataGen.generateOutputDict(amounts)
+    ShellTime = dataGen.generateOutputDict(amounts)
+    SelectionTime = dataGen.generateOutputDict(amounts)
+    HeapTime = dataGen.generateOutputDict(amounts)
+    QuickLTime = dataGen.generateOutputDict(amounts)
+    QuickRTime = dataGen.generateOutputDict(amounts)
 
     print("Generated Output Dicts")
 
@@ -71,31 +50,38 @@ if __name__ == '__main__':
             timeDiff = time.time() - timeStart
             SelectionTime[amount][spread] = timeDiff
 
+            timeStart = time.time()
+            selection.sort(values)
+            timeDiff = time.time() - timeStart
+            HeapTime[amount][spread] = timeDiff
+            """
+            timeStart = time.time()
+            quick.sortLeft(values)
+            timeDiff = time.time() - timeStart
+            QuickLTime[amount][spread] = timeDiff
+
+            timeStart = time.time()
+            quick.sortRand(values)
+            timeDiff = time.time() - timeStart
+            QuickRTime[amount][spread] = timeDiff """
+
     print("All Sorted")
 
     print("Saving InsertionSort Times")
-    with open('InsertionSort.csv', 'w', newline='') as file:
-        writer = csv.writer(file)
-        writer.writerow(["Amount", "Random", "Increasing",
-                        "Decreasing", "Constant", "ASpread"])
-        for amount in InsertionTime:
-            timingData = InsertionTime[amount].values()
-            writer.writerow([amount] + list(timingData))
+    csvOutput.create("InsertionSort", InsertionTime)
 
     print("Saving ShellSort Times")
-    with open('ShellSort.csv', 'w', newline='') as file:
-        writer = csv.writer(file)
-        writer.writerow(["Amount", "Random", "Increasing",
-                        "Decreasing", "Constant", "ASpread"])
-        for amount in ShellTime:
-            timingData = ShellTime[amount].values()
-            writer.writerow([amount] + list(timingData))
+    csvOutput.create("ShellSort", ShellTime)
 
     print("Saving SelectionSort Times")
-    with open('SelectionSort.csv', 'w', newline='') as file:
-        writer = csv.writer(file)
-        writer.writerow(["Amount", "Random", "Increasing",
-                        "Decreasing", "Constant", "ASpread"])
-        for amount in SelectionTime:
-            timingData = SelectionTime[amount].values()
-            writer.writerow([amount] + list(timingData))
+    csvOutput.create("SelectionSort", SelectionTime)
+
+    print("Saving HeapSort Times")
+    csvOutput.create("HeapSort", HeapTime)
+
+    print("Saving QuickSort Times")
+    #csvOutput.create("QuickSort", QuickLTime)
+
+    #csvOutput.createMultiple("QuickSort", 2, [QuickLTime, QuickRTime])
+
+    print("Saving Completed")
