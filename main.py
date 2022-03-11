@@ -8,7 +8,19 @@ import time
 import csv
 
 
-def generateTestingData(start, stop, step):
+def generateAmountsMuliply(start, end, step):
+    outArray = []
+    while start < end:
+        outArray.append(start)
+        start *= step
+    return outArray
+
+
+def generateAmountsAdd(start, end, step):
+    return [i for i in range(start, end, step)]
+
+
+def generateTestingData(amounts):
     return {
         value: {
             "Random": numGen.Random(value),
@@ -16,11 +28,11 @@ def generateTestingData(start, stop, step):
             "Decreasing": numGen.Decreasing(value),
             "Constant": numGen.Constant(value),
             "ASpread": numGen.ASpread(value),
-        } for value in range(start, stop, step)
+        } for value in amounts
     }
 
 
-def generateOutputDict(start, stop, step):
+def generateOutputDict(amounts):
     return {
         value: {
             "Random": -1,
@@ -28,7 +40,7 @@ def generateOutputDict(start, stop, step):
             "Decreasing": -1,
             "Constant": -1,
             "ASpread": -1,
-        } for value in range(start, stop, step)
+        } for value in amounts
     }
 
 
@@ -36,15 +48,17 @@ if __name__ == '__main__':
     """    outF = open("output.out", "w")
        outF.write("test") """
 
-    dataStart = 1000
-    dataStop = 5001
-    dataStep = 1000
+    dataStart = 1
+    dataStop = dataStart * 5**6 + 1
+    dataStepMultiplier = 5
 
-    inputData = generateTestingData(dataStart, dataStop, dataStep)
+    amounts = generateAmountsMuliply(dataStart, dataStop, dataStepMultiplier)
+
+    inputData = generateTestingData(amounts)
     print("Generated Data")
-    InsertionTime = generateOutputDict(dataStart, dataStop, dataStep)
-    ShellTime = generateOutputDict(dataStart, dataStop, dataStep)
-    SelectionTime = generateOutputDict(dataStart, dataStop, dataStep)
+    InsertionTime = generateOutputDict(amounts)
+    ShellTime = generateOutputDict(amounts)
+    SelectionTime = generateOutputDict(amounts)
 
     print("Generated Output Dicts")
 
