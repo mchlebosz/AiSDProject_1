@@ -7,11 +7,17 @@ import dataGen
 import time
 import amounts
 import csvOutput
+import numGen
 
 
 if __name__ == '__main__':
-    """    outF = open("output.out", "w")
-       outF.write("test") """
+    # PreAlgorithm only for Showcase
+    """ amount = int(input("Enter Amount: \n"))
+    values = numGen.Random(amount)
+    print(values)
+    shell.sort(values)
+    print("\n", values)
+    exit() """
 
     chooseString = input("Choose which algorithms to run: \n 1. Insertion Sort \n 2. Shell Sort \n 3. Selection Sort \n 4. Heap Sort \n 5. Quick Sort (Left Pivot) \n 6. Quick Sort (Random Pivot) \n Use numbers to chose one (i.e 135 = Insertion , Selection, QuickLeft ; 123456 for all) : \n")
     dataCount = int(input("Enter amount of data points\n"))
