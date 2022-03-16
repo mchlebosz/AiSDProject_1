@@ -1,4 +1,3 @@
-# Heap Sort in python
 
 def heapify(arr, n, i):
     # Find largest among root and children

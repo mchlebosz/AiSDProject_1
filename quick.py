@@ -2,7 +2,7 @@ import random
 import sys
 x = 100000
 # sys.setrecursionlimit(x)
-CONSTANT = 4000
+CONSTANT = 80000
 
 
 def partition(array, low, high):
