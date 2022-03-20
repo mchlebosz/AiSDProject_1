@@ -2,6 +2,8 @@ import insertion
 import shell
 import selection
 import quick
+# quick.sortLeft(values)
+# quick.sortRand(values)
 import heap
 import dataGen
 import time
@@ -15,7 +17,7 @@ if __name__ == '__main__':
     """ amount = int(input("Enter Amount: \n"))
     values = numGen.Random(amount)
     print(values)
-    shell.sort(values)
+    insertion.sort(values)
     print("\n", values)
     exit() """
 

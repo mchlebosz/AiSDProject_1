@@ -1,6 +1,6 @@
 import random
 import sys
-x = 100000
+#x = 100000
 # sys.setrecursionlimit(x)
 CONSTANT = 80000
 
@@ -21,7 +21,7 @@ def partition(array, low, high):
         if array[j] <= pivot:
             # if element smaller than pivot is found
             # swap it with the greater element pointed by i
-            i = i + 1
+            i += 1
 
             # swapping element at i with element at j
             (array[i], array[j]) = (array[j], array[i])
@@ -96,12 +96,34 @@ def sortRand(array, low=0, high=None):
         sortLeft(array, piv + 1, high)
 
 
+def qsort(A, L=0, P=None):
+    if P == None:
+        P = len(A)-1
+    x = A[0]
+    i = L
+    j = P
+    while(i < j):
+        while(A[i] < x):
+            i += 1
+        while(A[j] > x):
+            j -= 1
+        if i < j:
+            A[i], A[j] = A[j], A[i]
+    if i > j:
+        qsort(A, L, j)
+        qsort(A, i, P)
+        """
+            X to Pivot
+            L to najbardziej na lewo
+            P na prawo """
+
+
 if __name__ == "__main__":
-    array = [1, 2, 6, 3, 78, 2, 2, 2,
+    """ array = [1, 2, 6, 3, 78, 2, 2, 2,
              5, 2, 98, 2, 15, 65, 13, 1, 374, 1]
     sortLeft(array)
-    print(array)
+    print(array) """
     array = [1, 2, 6, 3, 78, 2, 2, 2,
              5, 2, 98, 2, 15, 65, 13, 1, 374, 1]
-    sortRand(array)
+    qsort(array)
     print(array)
