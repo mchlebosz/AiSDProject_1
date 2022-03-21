@@ -78,15 +78,15 @@ if __name__ == '__main__':
                 timeDiff = time.time() - timeStart
                 HeapTime[amount][spread] = timeDiff
             # because of stack size quicksort limit is 17000 numbers to sort
-            if (amount <= 17000):
+            if (amount <= 17000000):
                 if "5" in chooseString:
                     timeStart = time.time()
-                    quick.sortLeft(values)
+                    quick.quicksortL(values)
                     timeDiff = time.time() - timeStart
                     QuickLTime[amount][spread] = timeDiff
                 if "6" in chooseString:
                     timeStart = time.time()
-                    quick.sortRand(values)
+                    quick.quicksortR(values)
                     timeDiff = time.time() - timeStart
                     QuickRTime[amount][spread] = timeDiff
 
