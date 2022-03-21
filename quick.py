@@ -97,7 +97,7 @@ def sortRand(array, low=0, high=None):
 
 
 def qsort(A, L=0, P=None):
-    if P == None:
+    if P is None:
         P = len(A)-1
     x = A[0]
     i = L
@@ -118,6 +118,36 @@ def qsort(A, L=0, P=None):
             P na prawo """
 
 
+def quick_sort_rnd(data, left=0, right=None):
+    if right is None:
+        right = len(data) - 1
+    if left >= right:
+        return
+    #pivot = data[rand() % (right - left + 1) + left]
+    pivot = data[0]
+
+    i = left
+    j = right
+
+    while i <= j:
+        while data[i] < pivot:
+            i += 1
+        while data[j] > pivot:
+            j -= 1
+
+        if i <= j:
+            data[i], data[j] = data[j], data[i]
+            i += 1
+            j -= 1
+        else:
+            break
+
+    if j > left:
+        quick_sort_rnd(data, left, j)
+    if i < right:
+        quick_sort_rnd(data, i, right)
+
+
 if __name__ == "__main__":
     """ array = [1, 2, 6, 3, 78, 2, 2, 2,
              5, 2, 98, 2, 15, 65, 13, 1, 374, 1]
@@ -125,5 +155,5 @@ if __name__ == "__main__":
     print(array) """
     array = [1, 2, 6, 3, 78, 2, 2, 2,
              5, 2, 98, 2, 15, 65, 13, 1, 374, 1]
-    qsort(array)
+    quick_sort_rnd(array)
     print(array)
