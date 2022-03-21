@@ -71,8 +71,10 @@ def sortRand(a_list):
 if __name__ == "__main__":
     array = [1, 2, 6, 3, 78, 2, 2, 2,
              5, 2, 98, 2, 15, 65, 13, 1, 374, 1]
+    sortRand(array)
+    print(array)
 
-    # quicksortL(array)
-    sortRand2(array)
-    # quicksortL(array)
+    array = [1, 2, 6, 3, 78, 2, 2, 2,
+             5, 2, 98, 2, 15, 65, 13, 1, 374, 1]
+    sortLeft(array)
     print(array)
