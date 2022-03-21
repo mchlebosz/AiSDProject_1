@@ -97,8 +97,11 @@ def sortRand(array, low=0, high=None):
 
 
 def qsort(A, L=0, P=None):
-    if P == None:
+
+    sys.setrecursionlimit(max(sys.getrecursionlimit(), len(array) + CONSTANT))
+    if P==None:
         P = len(A)-1
+
     x = A[0]
     i = L
     j = P
@@ -107,23 +110,71 @@ def qsort(A, L=0, P=None):
             i += 1
         while(A[j] > x):
             j -= 1
-        if i < j:
+        if i <= j:
             A[i], A[j] = A[j], A[i]
-    if i > j:
-        qsort(A, L, j)
-        qsort(A, i, P)
+            i=i+1
+            j=j-1
+        if L<j :
+            qsort(A, L, j)
+        if P >i:
+            qsort(A, i, P)
         """
             X to Pivot
             L to najbardziej na lewo
             P na prawo """
 
+def quicksortL(a_list):
 
+    """Hoare partition scheme, see https://en.wikipedia.org/wiki/Quicksort"""
+    sys.setrecursionlimit(max(sys.getrecursionlimit(), len(a_list) + CONSTANT))
+    def _quicksort(a_list, low, high):
+        # must run partition on sections with 2 elements or more
+        if low < high:
+            p = partition(a_list, low, high)
+            _quicksort(a_list, low, p)
+            _quicksort(a_list, p+1, high)
+    def partition(a_list, low, high):
+        pivot = a_list[low]
+        while True:
+            while a_list[low] < pivot:
+                low += 1
+            while a_list[high] > pivot:
+                high -= 1
+            if low >= high:
+                return high
+            a_list[low], a_list[high] = a_list[high], a_list[low]
+            low += 1
+            high -= 1
+    _quicksort(a_list, 0, len(a_list)-1)
+    return a_list
+def quicksortR(a_list):
+    """Hoare partition scheme, see https://en.wikipedia.org/wiki/Quicksort"""
+    sys.setrecursionlimit(max(sys.getrecursionlimit(), len(a_list) + CONSTANT))
+    def _quicksort(a_list, low, high):
+        # must run partition on sections with 2 elements or more
+        if low < high:
+            p = partition(a_list, low, high)
+            _quicksort(a_list, low, p)
+            _quicksort(a_list, p+1, high)
+    def partition(a_list, low, high):
+        pivot = a_list[random.randint(low, high)]
+        while True:
+            while a_list[low] < pivot:
+                low += 1
+            while a_list[high] > pivot:
+                high -= 1
+            if low >= high:
+                return high
+            a_list[low], a_list[high] = a_list[high], a_list[low]
+            low += 1
+            high -= 1
+    _quicksort(a_list, 0, len(a_list)-1)
+    return a_list
 if __name__ == "__main__":
-    """ array = [1, 2, 6, 3, 78, 2, 2, 2,
-             5, 2, 98, 2, 15, 65, 13, 1, 374, 1]
-    sortLeft(array)
-    print(array) """
     array = [1, 2, 6, 3, 78, 2, 2, 2,
              5, 2, 98, 2, 15, 65, 13, 1, 374, 1]
-    qsort(array)
+
+    #quicksortL(array)
+
+    quicksortR(array)
     print(array)
